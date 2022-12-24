@@ -17,7 +17,9 @@ defmodule Sprinty.Application do
       # Start Finch
       {Finch, name: Sprinty.Finch},
       # Start the Endpoint (http/https)
-      SprintyWeb.Endpoint
+      SprintyWeb.Endpoint,
+      # Start the presence service
+      SprintyWeb.Presence
       # Start a worker by calling: Sprinty.Worker.start_link(arg)
       # {Sprinty.Worker, arg}
     ]
