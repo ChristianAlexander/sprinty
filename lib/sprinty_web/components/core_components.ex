@@ -10,6 +10,7 @@ defmodule SprintyWeb.CoreComponents do
   [heroicons_elixir](https://github.com/mveytsman/heroicons_elixir) project.
   """
   use Phoenix.Component
+  use CVA.Component
 
   alias Phoenix.LiveView.JS
   import SprintyWeb.Gettext
@@ -580,6 +581,29 @@ defmodule SprintyWeb.CoreComponents do
     |> hide("##{id}-container")
     |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})
     |> JS.pop_focus()
+  end
+
+  attr :value, :string, required: true
+  attr :rest, :global
+
+  variant(
+    :selected,
+    [
+      true: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700",
+      false: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
+    ],
+    default: false
+  )
+
+  def estimate_button(assigns) do
+    ~H"""
+    <button
+      class={"#{@cva_class} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none"}
+      {@rest}
+    >
+      <%= @value %>
+    </button>
+    """
   end
 
   @doc """

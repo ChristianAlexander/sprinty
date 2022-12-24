@@ -19,7 +19,10 @@ defmodule Sprinty.Application do
       # Start the Endpoint (http/https)
       SprintyWeb.Endpoint,
       # Start the presence service
-      SprintyWeb.Presence
+      SprintyWeb.Presence,
+      # Temporary registry / supervisor for testing
+      {Registry, keys: :unique, name: Sprinty.PokerGameRegistry},
+      {DynamicSupervisor, strategy: :one_for_one, name: Sprinty.PokerGameSupervisor}
       # Start a worker by calling: Sprinty.Worker.start_link(arg)
       # {Sprinty.Worker, arg}
     ]
